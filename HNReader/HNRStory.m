@@ -25,12 +25,15 @@
     return self;
 }
 
+
+// not sure if this should go in the model or viewcontroller
 - (NSString *)formatSubtitle
 {
     NSString *subtitle = [NSString stringWithFormat:@"%@ points by %@, %@", self.points, self.postedBy, self.postedAgo];
     return subtitle;
 }
 
+// this should probably be in the viewcontroller
 - (NSAttributedString *)formatTitleWithBaseUri
 {
     NSString *titleWithBaseUri = [NSString stringWithFormat:@"%@ (%@)", self.title, self.uri.host];

@@ -14,6 +14,7 @@
 #import "HNRStory.h"
 
 #define BackgroundColor [UIColor colorWithRed:0.859 green:0.862 blue:0.833 alpha:1.000];
+#define OrangeColor [UIColor colorWithRed:1.000 green:0.280 blue:0.000 alpha:1.000]
 #define CellContentsWidth 290.0f
 
 @implementation HNRMasterViewController
@@ -34,7 +35,7 @@
     [refreshControl addTarget:self action:@selector(loadStories) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
     
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:1.000 green:0.280 blue:0.000 alpha:1.000]];
+    [self.navigationController.navigationBar setTintColor:OrangeColor];
     
     self.tableView.backgroundColor = BackgroundColor;
 
@@ -57,6 +58,7 @@
                                    }
                                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                        NSLog(@"Error! %@", error);
+                                       // TODO: show some sort of unobtrusive message to the user
                                        [self.refreshControl endRefreshing];
                                    }];
 }

@@ -183,10 +183,8 @@
 				32E72F531660527A00A96F25 /* Views */,
 				32E72F541660528500A96F25 /* ViewControllers */,
 				32E72F091660516100A96F25 /* Supporting Files */,
-				321EDA4516611AB4006850AB /* HNRApiClient.h */,
-				321EDA4616611AB4006850AB /* HNRApiClient.m */,
-				321EDA49166156AA006850AB /* HNRStory.h */,
-				321EDA4A166156AA006850AB /* HNRStory.m */,
+				32F19F6A1664A3FF00877B09 /* API */,
+				32F19F6C1664A40C00877B09 /* Models */,
 			);
 			path = HNReader;
 			sourceTree = "<group>";
@@ -241,6 +239,24 @@
 				32E72F211660516100A96F25 /* HNRDetailViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		32F19F6A1664A3FF00877B09 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				321EDA4516611AB4006850AB /* HNRApiClient.h */,
+				321EDA4616611AB4006850AB /* HNRApiClient.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		32F19F6C1664A40C00877B09 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				321EDA49166156AA006850AB /* HNRStory.h */,
+				321EDA4A166156AA006850AB /* HNRStory.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -629,6 +645,7 @@
 				3263257D16616C6C0066556E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		32E72EF81660516100A96F25 /* Build configuration list for PBXProject "HNReader" */ = {
 			isa = XCConfigurationList;
