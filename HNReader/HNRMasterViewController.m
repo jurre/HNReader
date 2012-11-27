@@ -15,7 +15,6 @@
 
 #define BackgroundColor [UIColor colorWithRed:0.859 green:0.862 blue:0.833 alpha:1.000];
 #define OrangeColor [UIColor colorWithRed:1.000 green:0.280 blue:0.000 alpha:1.000]
-#define CellContentsWidth 290.0f
 
 @implementation HNRMasterViewController
 
@@ -30,6 +29,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
     [refreshControl addTarget:self action:@selector(loadStories) forControlEvents:UIControlEventValueChanged];
@@ -63,6 +64,11 @@
                                    }];
 }
 
+- (void)orientationChanged:(id)object
+{
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -88,9 +94,9 @@
     NSAttributedString *titleText = [story formatTitleWithBaseUri];
     
     NSString *subtitleText = [story formatSubtitle];
-    
     UIFont *titleFont = [UIFont systemFontOfSize:15.0];
-    CGSize constraint = CGSizeMake(CellContentsWidth, 20000.0f);
+    CGSize constraint = CGSizeMake([self cellContentWidth], 20000.0f);
+    
     CGSize storyLabelSize = [titleText.string sizeWithFont:titleFont constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
     
     UIFont *subtitleFont = [UIFont systemFontOfSize:14.0];
@@ -105,20 +111,22 @@
     
     HNRStory *story = [self.stories objectAtIndex:indexPath.row];
     NSAttributedString *titleText = [story formatTitleWithBaseUri];
+    CGSize constraint = CGSizeMake([self cellContentWidth], 20000.0f);
     
     UIFont *titleFont = [UIFont systemFontOfSize:15.0];
-    CGSize titleSize = [titleText.string sizeWithFont:titleFont constrainedToSize:CGSizeMake(CellContentsWidth, 20000.0f)];
+    CGSize titleSize = [titleText.string sizeWithFont:titleFont constrainedToSize:constraint];
+    
+    UIFont *subtitleFont = [UIFont systemFontOfSize:12.0];
+    CGSize subTitleSize = [titleText.string sizeWithFont:subtitleFont constrainedToSize:constraint];
     
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.titleTextLabel.numberOfLines = 0;
-    cell.titleTextLabel.frame = CGRectMake(5, 2, CellContentsWidth, titleSize.height + 30);
+    cell.titleTextLabel.frame = CGRectMake(5, 2, [self cellContentWidth], titleSize.height + 30);
     cell.titleTextLabel.font = titleFont;
     cell.titleTextLabel.attributedText = titleText;
     cell.titleTextLabel.backgroundColor = BackgroundColor;
     [cell.titleTextLabel sizeToFit];
     
-    UIFont *subtitleFont = [UIFont systemFontOfSize:12.0];
-    CGSize subTitleSize = [titleText.string sizeWithFont:subtitleFont constrainedToSize:CGSizeMake(CellContentsWidth, 800.0f)];
     cell.userLabel.frame = CGRectMake(5, titleSize.height, subTitleSize.width, subTitleSize.height + 10);
     cell.userLabel.text = [story formatSubtitle];
     return cell;
@@ -136,6 +144,16 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         HNRStory *story = self.stories[indexPath.row];
         [[segue destinationViewController] setRequestURL:story.uri];
+    }
+}
+
+- (float)cellContentWidth
+{
+    CGSize deviceSize = [UIScreen mainScreen].bounds.size;
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+        return deviceSize.height - 30;
+    } else {
+        return deviceSize.width - 30;
     }
 }
 

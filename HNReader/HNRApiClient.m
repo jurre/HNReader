@@ -20,7 +20,7 @@
     static HNRApiClient *__sharedInstance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __sharedInstance = [[HNRApiClient alloc] initWithBaseURL:[NSURL URLWithString:HNRApiClientBaseURLString]];
+        __sharedInstance = [[HNRApiClient alloc] initWithBaseURL:[NSURL URLWithString:HNApiStubClientBaseURLString]];
     });
     
     return __sharedInstance;

@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface HNRMasterViewController : UITableViewController
+
 @property(nonatomic, retain) NSMutableArray *stories;
+
+- (float)cellContentWidth;
 @end

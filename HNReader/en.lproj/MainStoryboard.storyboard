@@ -66,7 +66,7 @@
                             <outlet property="delegate" destination="12" id="15"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="HNReader" id="36"/>
+                    <navigationItem key="navigationItem" title="Master" id="36"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17" sceneMemberID="firstResponder"/>
             </objects>
@@ -88,7 +88,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Story" id="26"/>
+                    <navigationItem key="navigationItem" title="Detail" id="26"/>
                     <connections>
                         <outlet property="webView" destination="cCB-5k-20F" id="hRA-Pk-tD5"/>
                     </connections>
